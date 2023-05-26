@@ -3,7 +3,8 @@ body {
 
 .todo {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  justify-content: space-between;
 }
 
 .completed .description {
