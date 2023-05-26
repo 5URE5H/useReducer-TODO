@@ -5,7 +5,7 @@ const Actions = {
   ADD_TODO: "ADD_TODO",
   TOGGLE_TODO: "TOGGLE_TODO",
   UPDATE_TODO: "UPDATE_TODO",
-  DELETE_TODO: "DELETE_TODO"
+  DELETE_TODO: "DELETE_TODO",
 };
 
 const reducer = (todos, action) => {
@@ -81,7 +81,7 @@ export const Todo = ({ todo, dispatch }) => {
   const handleUpdate = () => {
     dispatch({
       type: Actions.UPDATE_TODO,
-      payload: { ...todo, name: editInput }
+      payload: { ...todo, name: editInput },
     });
     setIsEditMode(false);
   };
@@ -89,39 +89,46 @@ export const Todo = ({ todo, dispatch }) => {
   return (
     <>
       <div className={`todo ${todo.isComplete ? "completed" : ""}`}>
-        <input
-          type="checkbox"
-          onClick={() =>
-            dispatch({ type: Actions.TOGGLE_TODO, payload: { id: todo.id } })
-          }
-        />
-        {isEditMode ? (
-          <>
-            <input
-              type="text"
-              value={editInput}
-              onChange={(e) => setEditInput(e.target.value)}
-            />
-            <span className="edit" onClick={() => handleUpdate()}>
-              [update]
-            </span>
-          </>
-        ) : (
-          <span className="description">{todo.name}</span>
-        )}
-        {!isEditMode && (
-          <span className="edit" onClick={() => setIsEditMode((prev) => !prev)}>
-            [edit]
-          </span>
-        )}
-        <span
-          className="delete"
-          onClick={() =>
-            dispatch({ type: Actions.DELETE_TODO, payload: { id: todo.id } })
-          }
-        >
-          [delete]
-        </span>
+        <div>
+          <input
+            type="checkbox"
+            onClick={() =>
+              dispatch({ type: Actions.TOGGLE_TODO, payload: { id: todo.id } })
+            }
+          />
+          {isEditMode ? (
+            <>
+              <input
+                type="text"
+                value={editInput}
+                onChange={(e) => setEditInput(e.target.value)}
+              />
+              <button className="edit" onClick={() => handleUpdate()}>
+                update
+              </button>
+            </>
+          ) : (
+            <span className="description">{todo.name}</span>
+          )}
+        </div>
+        <div>
+          {!isEditMode && (
+            <button
+              className="edit"
+              onClick={() => setIsEditMode((prev) => !prev)}
+            >
+              Edit
+            </button>
+          )}
+          <button
+            className="delete"
+            onClick={() =>
+              dispatch({ type: Actions.DELETE_TODO, payload: { id: todo.id } })
+            }
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </>
   );
