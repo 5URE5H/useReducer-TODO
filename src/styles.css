@@ -1,0 +1,22 @@
+body {
+}
+
+.todo {
+  display: flex;
+  gap: 1rem;
+}
+
+.completed .description {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+}
+
+.edit {
+  color: blue;
+  cursor: pointer;
+}
